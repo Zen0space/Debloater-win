@@ -1,0 +1,146 @@
+[
+  {
+    "id": "xbox-app",
+    "name": "Xbox App",
+    "description": "Remove Xbox gaming app and related services",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *Xbox* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "microsoft-3d-builder",
+    "name": "3D Builder",
+    "description": "Remove 3D Builder app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *3DBuilder* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "windows-maps",
+    "name": "Windows Maps",
+    "description": "Remove Windows Maps app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *WindowsMaps* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "windows-weather",
+    "name": "Weather App",
+    "description": "Remove Weather app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *BingWeather* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "windows-news",
+    "name": "News App",
+    "description": "Remove News app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *BingNews* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "zune-music",
+    "name": "Groove Music",
+    "description": "Remove Groove Music app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *ZuneMusic* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "zune-video",
+    "name": "Movies & TV",
+    "description": "Remove Movies & TV app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *ZuneVideo* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "windows-feedback",
+    "name": "Feedback Hub",
+    "description": "Remove Feedback Hub app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *FeedbackHub* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "windows-alarm",
+    "name": "Alarms & Clock",
+    "description": "Remove Alarms & Clock app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *WindowsAlarms* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "windows-camera",
+    "name": "Camera App",
+    "description": "Remove Camera app (use with caution)",
+    "category": "apps",
+    "safe": false,
+    "command": "Get-AppxPackage *WindowsCamera* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "people-app",
+    "name": "People App",
+    "description": "Remove People app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *People* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "solitaire",
+    "name": "Microsoft Solitaire",
+    "description": "Remove Microsoft Solitaire Collection",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *MicrosoftSolitaireCollection* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "get-help",
+    "name": "Get Help",
+    "description": "Remove Get Help app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *GetHelp* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "get-started",
+    "name": "Get Started",
+    "description": "Remove Get Started app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *GetStarted* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "office-sway",
+    "name": "Sway",
+    "description": "Remove Office Sway app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *Office.Sway* | Remove-AppxPackage",
+    "rollbackCommand": null
+  },
+  {
+    "id": "wallet",
+    "name": "Wallet",
+    "description": "Remove Wallet app",
+    "category": "apps",
+    "safe": true,
+    "command": "Get-AppxPackage *Wallet* | Remove-AppxPackage",
+    "rollbackCommand": null
+  }
+]

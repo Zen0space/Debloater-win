@@ -1,0 +1,56 @@
+[
+  {
+    "id": "pause-updates",
+    "name": "Pause Updates",
+    "description": "Pause Windows updates for maximum duration",
+    "category": "updates",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'PauseUpdatesExpiryTime' -Value (Get-Date).AddDays(365).ToString('yyyy-MM-ddTHH:mm:ss'); Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'PauseFeatureUpdatesExpiryTime' -Value (Get-Date).AddDays(365).ToString('yyyy-MM-ddTHH:mm:ss')",
+    "rollbackCommand": "Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'PauseUpdatesExpiryTime'; Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'PauseFeatureUpdatesExpiryTime'"
+  },
+  {
+    "id": "disable-driver-updates",
+    "name": "Disable Driver Updates",
+    "description": "Disable automatic driver updates from Windows Update",
+    "category": "updates",
+    "safe": true,
+    "command": "New-Item -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Device Metadata' -Force | Out-Null; Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Device Metadata' -Name 'PreventDeviceMetadataFromNetwork' -Value 1",
+    "rollbackCommand": "Remove-Item -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Device Metadata' -Recurse -ErrorAction SilentlyContinue"
+  },
+  {
+    "id": "disable-windows-update-restart",
+    "name": "Disable Auto Restart",
+    "description": "Disable automatic restart for updates",
+    "category": "updates",
+    "safe": true,
+    "command": "New-Item -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Force | Out-Null; New-Item -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU' -Force | Out-Null; Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU' -Name 'NoAutoRebootWithLoggedOnUsers' -Value 1; Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU' -Name 'AUPowerManagement' -Value 0",
+    "rollbackCommand": "Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU' -Name 'NoAutoRebootWithLoggedOnUsers'; Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU' -Name 'AUPowerManagement'"
+  },
+  {
+    "id": "disable-windows-update-notification",
+    "name": "Disable Update Notification",
+    "description": "Disable update notifications",
+    "category": "updates",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DisableOSUpgrade' -Value 1",
+    "rollbackCommand": "Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate' -Name 'DisableOSUpgrade'"
+  },
+  {
+    "id": "set-metered-connection",
+    "name": "Set Metered Connection",
+    "description": "Mark connection as metered to limit downloads",
+    "category": "updates",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'AllowAutoWindowsUpdateDownloadOverMeteredNetwork' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings' -Name 'AllowAutoWindowsUpdateDownloadOverMeteredNetwork' -Value 1"
+  },
+  {
+    "id": "disable-cortana-updates",
+    "name": "Disable Cortana Updates",
+    "description": "Disable automatic Cortana updates",
+    "category": "updates",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Cloud Content' -Name 'DisableWindowsConsumerFeatures' -Value 1",
+    "rollbackCommand": "Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Cloud Content' -Name 'DisableWindowsConsumerFeatures'"
+  }
+]

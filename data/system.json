@@ -1,0 +1,110 @@
+[
+  {
+    "id": "disable-transparency",
+    "name": "Disable Transparency",
+    "description": "Disable transparency effects for better performance",
+    "category": "system",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' -Name 'EnableTransparency' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' -Name 'EnableTransparency' -Value 1"
+  },
+  {
+    "id": "disable-animations",
+    "name": "Disable Animations",
+    "description": "Disable Windows animations for better performance",
+    "category": "system",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects' -Name 'VisualFXSetting' -Value 3",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects' -Name 'VisualFXSetting' -Value 2"
+  },
+  {
+    "id": "high-performance-power",
+    "name": "High Performance Power Plan",
+    "description": "Set power plan to High Performance",
+    "category": "system",
+    "safe": true,
+    "command": "$scheme = powercfg -list | Select-String 'High Performance' | ForEach-Object { ($_ -split '\\s+')[3] }; if ($scheme) { powercfg -setactive $scheme }",
+    "rollbackCommand": "$scheme = powercfg -list | Select-String 'Balanced' | ForEach-Object { ($_ -split '\\s+')[3] }; if ($scheme) { powercfg -setactive $scheme }"
+  },
+  {
+    "id": "enable-game-mode",
+    "name": "Enable Game Mode",
+    "description": "Enable Windows Game Mode for better gaming performance",
+    "category": "system",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\GameBar' -Name 'AllowAutoGameMode' -Value 1; Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\GameBar' -Name 'AutoGameModeEnabled' -Value 1",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\GameBar' -Name 'AllowAutoGameMode' -Value 0; Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\GameBar' -Name 'AutoGameModeEnabled' -Value 0"
+  },
+  {
+    "id": "enable-gpu-scheduling",
+    "name": "Enable GPU Scheduling",
+    "description": "Enable Hardware-accelerated GPU scheduling",
+    "category": "system",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers' -Name 'HwSchMode' -Value 2",
+    "rollbackCommand": "Remove-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers' -Name 'HwSchMode'"
+  },
+  {
+    "id": "disable-hibernate",
+    "name": "Disable Hibernate",
+    "description": "Disable hibernation to save disk space",
+    "category": "system",
+    "safe": true,
+    "command": "powercfg -h off",
+    "rollbackCommand": "powercfg -h on"
+  },
+  {
+    "id": "disable-fast-startup",
+    "name": "Disable Fast Startup",
+    "description": "Disable fast startup hybrid sleep",
+    "category": "system",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power' -Name 'HiberbootEnabled' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power' -Name 'HiberbootEnabled' -Value 1"
+  },
+  {
+    "id": "disable-superfetch-ssd",
+    "name": "Disable Superfetch (SSD)",
+    "description": "Disable Superfetch for SSD systems",
+    "category": "system",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters' -Name 'EnablePrefetcher' -Value 0; Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters' -Name 'EnableSuperfetch' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters' -Name 'EnablePrefetcher' -Value 3; Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters' -Name 'EnableSuperfetch' -Value 3"
+  },
+  {
+    "id": "disable-memory-compression",
+    "name": "Disable Memory Compression",
+    "description": "Disable memory compression (may help performance issues)",
+    "category": "system",
+    "safe": true,
+    "command": "Disable-MMAgent -MemoryCompression",
+    "rollbackCommand": "Enable-MMAgent -MemoryCompression"
+  },
+  {
+    "id": "disable-windows-tips",
+    "name": "Disable Windows Tips",
+    "description": "Disable Windows tips and tricks notifications",
+    "category": "system",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager' -Name 'SoftLandingEnabled' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager' -Name 'SoftLandingEnabled' -Value 1"
+  },
+  {
+    "id": "disable-spotlight",
+    "name": "Disable Windows Spotlight",
+    "description": "Disable Windows Spotlight on lock screen and desktop",
+    "category": "system",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent' -Name 'DisableWindowsSpotlightFeatures' -Value 1; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent' -Name 'DisableTailoredExperiencesWithDiagnosticData' -Value 1",
+    "rollbackCommand": "Remove-ItemProperty -Path 'HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent' -Name 'DisableWindowsSpotlightFeatures'; Remove-ItemProperty -Path 'HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent' -Name 'DisableTailoredExperiencesWithDiagnosticData'"
+  },
+  {
+    "id": "disable-bing-search",
+    "name": "Disable Bing Search",
+    "description": "Disable Bing search in Start menu",
+    "category": "system",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'BingSearchEnabled' -Value 0; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'CortanaConsent' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'BingSearchEnabled' -Value 1; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'CortanaConsent' -Value 1"
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "disable-telemetry",
+    "name": "Disable Telemetry",
+    "description": "Disable Windows telemetry data collection",
+    "category": "privacy",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection' -Name 'AllowTelemetry' -Value 0; Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection' -Name 'AllowTelemetry' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection' -Name 'AllowTelemetry' -Value 3; Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection' -Name 'AllowTelemetry' -Value 3"
+  },
+  {
+    "id": "disable-advertising-id",
+    "name": "Disable Advertising ID",
+    "description": "Disable advertising ID tracking",
+    "category": "privacy",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo' -Name 'Enabled' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AdvertisingInfo' -Name 'Enabled' -Value 1"
+  },
+  {
+    "id": "disable-location-services",
+    "name": "Disable Location Services",
+    "description": "Disable Windows location services",
+    "category": "privacy",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location' -Name 'Value' -Value 'Deny'",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location' -Name 'Value' -Value 'Allow'"
+  },
+  {
+    "id": "disable-cortana",
+    "name": "Disable Cortana",
+    "description": "Disable Cortana and search tracking",
+    "category": "privacy",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'CortanaConsent' -Value 0; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'BingSearchEnabled' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'CortanaConsent' -Value 1; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'BingSearchEnabled' -Value 1"
+  },
+  {
+    "id": "disable-web-search",
+    "name": "Disable Web Search",
+    "description": "Disable web search in Windows search",
+    "category": "privacy",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'BingSearchEnabled' -Value 0; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'DisableWebSearch' -Value 1",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'BingSearchEnabled' -Value 1; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'DisableWebSearch' -Value 0"
+  },
+  {
+    "id": "disable-timeline",
+    "name": "Disable Timeline",
+    "description": "Disable Windows Timeline activity history",
+    "category": "privacy",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Activities' -Name 'Enabled' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Activities' -Name 'Enabled' -Value 1"
+  },
+  {
+    "id": "disable-activity-history",
+    "name": "Disable Activity History",
+    "description": "Disable Windows activity history collection",
+    "category": "privacy",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System' -Name 'EnableActivityFeed' -Value 0; Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System' -Name 'PublishUserActivities' -Value 0; Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System' -Name 'UploadUserActivities' -Value 0",
+    "rollbackCommand": "Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System' -Name 'EnableActivityFeed'; Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System' -Name 'PublishUserActivities'; Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\System' -Name 'UploadUserActivities'"
+  },
+  {
+    "id": "disable-camera-access",
+    "name": "Disable Camera Access",
+    "description": "Disable camera access for apps",
+    "category": "privacy",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\webcam' -Name 'Value' -Value 'Deny'",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\webcam' -Name 'Value' -Value 'Allow'"
+  },
+  {
+    "id": "disable-microphone-access",
+    "name": "Disable Microphone Access",
+    "description": "Disable microphone access for apps",
+    "category": "privacy",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\microphone' -Name 'Value' -Value 'Deny'",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\microphone' -Name 'Value' -Value 'Allow'"
+  },
+  {
+    "id": "disable-app-diagnostics",
+    "name": "Disable App Diagnostics",
+    "description": "Disable app diagnostics data collection",
+    "category": "privacy",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\appDiagnostics' -Name 'Value' -Value 'Deny'",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\appDiagnostics' -Name 'Value' -Value 'Allow'"
+  },
+  {
+    "id": "disable-sync-settings",
+    "name": "Disable Sync Settings",
+    "description": "Disable Windows settings sync",
+    "category": "privacy",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\SettingsSync' -Name 'SyncPolicy' -Value 5",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\SettingsSync' -Name 'SyncPolicy' -Value 0"
+  },
+  {
+    "id": "disable-cloud-content",
+    "name": "Disable Cloud Content",
+    "description": "Disable Windows cloud content suggestions",
+    "category": "privacy",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent' -Name 'DisableWindowsConsumerFeatures' -Value 1",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent' -Name 'DisableWindowsConsumerFeatures' -Value 0"
+  }
+]

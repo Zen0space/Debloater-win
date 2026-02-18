@@ -1,0 +1,128 @@
+[
+  {
+    "id": "disable-aero-shake",
+    "name": "Disable Aero Shake",
+    "description": "Disable Aero Shake window minimization",
+    "category": "registry",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'DisallowShaking' -Value 1",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'DisallowShaking' -Value 0"
+  },
+  {
+    "id": "show-file-extensions",
+    "name": "Show File Extensions",
+    "description": "Always show file extensions in File Explorer",
+    "category": "registry",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'HideFileExt' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'HideFileExt' -Value 1"
+  },
+  {
+    "id": "show-hidden-files",
+    "name": "Show Hidden Files",
+    "description": "Show hidden files and folders",
+    "category": "registry",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'Hidden' -Value 1",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'Hidden' -Value 2"
+  },
+  {
+    "id": "disable-quick-access",
+    "name": "Disable Quick Access",
+    "description": "Disable Quick Access in File Explorer",
+    "category": "registry",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer' -Name 'ShowRecent' -Value 0; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer' -Name 'ShowFrequent' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer' -Name 'ShowRecent' -Value 1; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer' -Name 'ShowFrequent' -Value 1"
+  },
+  {
+    "id": "classic-context-menu",
+    "name": "Classic Context Menu",
+    "description": "Use classic right-click context menu instead of modern",
+    "category": "registry",
+    "safe": true,
+    "command": "New-Item -Path 'HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32' -Force | Out-Null",
+    "rollbackCommand": "Remove-Item -Path 'HKCU:\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}' -Recurse -ErrorAction SilentlyContinue"
+  },
+  {
+    "id": "disable-3d-objects",
+    "name": "Disable 3D Objects",
+    "description": "Remove 3D Objects from This PC",
+    "category": "registry",
+    "safe": true,
+    "command": "Remove-Item -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MyComputer\\NameSpace\\{0DB7E17F-3293-4FB9-B90F-6463F4A50E6A}' -ErrorAction SilentlyContinue; Remove-Item -Path 'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MyComputer\\NameSpace\\{0DB7E17F-3293-4FB9-B90F-6463F4A50E6A}' -ErrorAction SilentlyContinue",
+    "rollbackCommand": "New-Item -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MyComputer\\NameSpace\\{0DB7E17F-3293-4FB9-B90F-6463F4A50E6A}' -Force | Out-Null; New-Item -Path 'HKLM:\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MyComputer\\NameSpace\\{0DB7E17F-3293-4FB9-B90F-6463F4A50E6A}' -Force | Out-Null"
+  },
+  {
+    "id": "disable-one-drive",
+    "name": "Disable OneDrive",
+    "description": "Disable OneDrive integration",
+    "category": "registry",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive' -Name 'DisableFileSyncNGSC' -Value 1",
+    "rollbackCommand": "Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive' -Name 'DisableFileSyncNGSC'"
+  },
+  {
+    "id": "disable-sticky-keys",
+    "name": "Disable Sticky Keys",
+    "description": "Disable sticky keys shortcut (Shift x5)",
+    "category": "registry",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\Control Panel\\Accessibility\\StickyKeys' -Name 'Flags' -Value '506'",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\Control Panel\\Accessibility\\StickyKeys' -Name 'Flags' -Value '510'"
+  },
+  {
+    "id": "disable-lock-screen",
+    "name": "Disable Lock Screen",
+    "description": "Disable lock screen (go directly to login)",
+    "category": "registry",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Personalization' -Name 'NoLockScreen' -Value 1",
+    "rollbackCommand": "Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Personalization' -Name 'NoLockScreen'"
+  },
+  {
+    "id": "enable-dark-mode",
+    "name": "Enable Dark Mode",
+    "description": "Enable dark mode for system apps",
+    "category": "registry",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' -Name 'AppsUseLightTheme' -Value 0; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' -Name 'SystemUsesLightTheme' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' -Name 'AppsUseLightTheme' -Value 1; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize' -Name 'SystemUsesLightTheme' -Value 1"
+  },
+  {
+    "id": "disable-start-menu-ads",
+    "name": "Disable Start Menu Ads",
+    "description": "Disable suggested apps in Start menu",
+    "category": "registry",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager' -Name 'ContentDeliveryAllowed' -Value 0; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager' -Name 'SilentInstalledAppsEnabled' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager' -Name 'ContentDeliveryAllowed' -Value 1; Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager' -Name 'SilentInstalledAppsEnabled' -Value 1"
+  },
+  {
+    "id": "disable-action-center",
+    "name": "Disable Action Center",
+    "description": "Disable Action Center notifications",
+    "category": "registry",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer' -Name 'DisableNotificationCenter' -Value 1",
+    "rollbackCommand": "Remove-ItemProperty -Path 'HKCU:\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer' -Name 'DisableNotificationCenter'"
+  },
+  {
+    "id": "disable-taskbar-search",
+    "name": "Disable Taskbar Search",
+    "description": "Hide search box from taskbar",
+    "category": "registry",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'SearchboxTaskbarMode' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Search' -Name 'SearchboxTaskbarMode' -Value 1"
+  },
+  {
+    "id": "disable-task-view",
+    "name": "Disable Task View Button",
+    "description": "Hide Task View button from taskbar",
+    "category": "registry",
+    "safe": true,
+    "command": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'ShowTaskViewButton' -Value 0",
+    "rollbackCommand": "Set-ItemProperty -Path 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced' -Name 'ShowTaskViewButton' -Value 1"
+  }
+]

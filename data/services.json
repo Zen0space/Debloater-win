@@ -1,0 +1,119 @@
+[
+  {
+    "id": "disable-superfetch",
+    "name": "Disable Superfetch",
+    "description": "Disable Superfetch/SysMain service (improves performance on SSDs)",
+    "category": "services",
+    "safe": true,
+    "command": "Set-Service -Name SysMain -StartupType Disabled; Stop-Service -Name SysMain -Force",
+    "rollbackCommand": "Set-Service -Name SysMain -StartupType Manual; Start-Service -Name SysMain"
+  },
+  {
+    "id": "disable-windows-search",
+    "name": "Disable Windows Search",
+    "description": "Disable Windows Search indexing (improves performance on SSDs)",
+    "category": "services",
+    "safe": true,
+    "command": "Set-Service -Name WSearch -StartupType Disabled; Stop-Service -Name WSearch -Force",
+    "rollbackCommand": "Set-Service -Name WSearch -StartupType Automatic; Start-Service -Name WSearch"
+  },
+  {
+    "id": "disable-xbox-gaming",
+    "name": "Disable Xbox Gaming Services",
+    "description": "Disable Xbox gaming and related services",
+    "category": "services",
+    "safe": true,
+    "command": "Set-Service -Name XboxGip -StartupType Disabled; Stop-Service -Name XboxGip -Force; Set-Service -Name XboxNetApiSvc -StartupType Disabled; Stop-Service -Name XboxNetApiSvc -Force",
+    "rollbackCommand": "Set-Service -Name XboxGip -StartupType Manual; Start-Service -Name XboxGip; Set-Service -Name XboxNetApiSvc -StartupType Manual; Start-Service -Name XboxNetApiSvc"
+  },
+  {
+    "id": "disable-diagnostics",
+    "name": "Disable Diagnostics Tracking",
+    "description": "Disable Diagnostics Tracking Service",
+    "category": "services",
+    "safe": true,
+    "command": "Set-Service -Name DiagTrack -StartupType Disabled; Stop-Service -Name DiagTrack -Force",
+    "rollbackCommand": "Set-Service -Name DiagTrack -StartupType Automatic; Start-Service -Name DiagTrack"
+  },
+  {
+    "id": "disable-dmwappushservice",
+    "name": "Disable WAP Push Message",
+    "description": "Disable WAP Push Message Routing Service",
+    "category": "services",
+    "safe": true,
+    "command": "Set-Service -Name dmwappushservice -StartupType Disabled; Stop-Service -Name dmwappushservice -Force",
+    "rollbackCommand": "Set-Service -Name dmwappushservice -StartupType Automatic; Start-Service -Name dmwappushservice"
+  },
+  {
+    "id": "disable-advertising",
+    "name": "Disable Advertising",
+    "description": "Disable Advertising ID and related services",
+    "category": "services",
+    "safe": true,
+    "command": "Set-Service -Name AdvertisingInfo -StartupType Disabled -ErrorAction SilentlyContinue",
+    "rollbackCommand": "Set-Service -Name AdvertisingInfo -StartupType Automatic -ErrorAction SilentlyContinue"
+  },
+  {
+    "id": "disable-cloud-sync",
+    "name": "Disable Cloud Sync",
+    "description": "Disable Sync Host service",
+    "category": "services",
+    "safe": true,
+    "command": "Set-Service -Name OneSyncSvc -StartupType Disabled; Stop-Service -Name OneSyncSvc -Force",
+    "rollbackCommand": "Set-Service -Name OneSyncSvc -StartupType Automatic; Start-Service -Name OneSyncSvc"
+  },
+  {
+    "id": "disable-geo-tracking",
+    "name": "Disable Geolocation Service",
+    "description": "Disable Geolocation tracking service",
+    "category": "services",
+    "safe": true,
+    "command": "Set-Service -Name lfsvc -StartupType Disabled; Stop-Service -Name lfsvc -Force",
+    "rollbackCommand": "Set-Service -Name lfsvc -StartupType Manual; Start-Service -Name lfsvc"
+  },
+  {
+    "id": "disable-print-spooler",
+    "name": "Disable Print Spooler",
+    "description": "Disable Print Spooler (if you don't use printers)",
+    "category": "services",
+    "safe": true,
+    "command": "Set-Service -Name Spooler -StartupType Disabled; Stop-Service -Name Spooler -Force",
+    "rollbackCommand": "Set-Service -Name Spooler -StartupType Automatic; Start-Service -Name Spooler"
+  },
+  {
+    "id": "disable-windows-defender",
+    "name": "Disable Windows Defender",
+    "description": "Disable Windows Defender Real-time Protection (use with caution)",
+    "category": "services",
+    "safe": false,
+    "command": "Set-MpPreference -DisableRealtimeMonitoring $true; Set-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender' -Name 'DisableAntiSpyware' -Value 1",
+    "rollbackCommand": "Set-MpPreference -DisableRealtimeMonitoring $false; Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender' -Name 'DisableAntiSpyware'"
+  },
+  {
+    "id": "disable-fax-service",
+    "name": "Disable Fax Service",
+    "description": "Disable Fax service (if you don't use fax)",
+    "category": "services",
+    "safe": true,
+    "command": "Set-Service -Name Fax -StartupType Disabled; Stop-Service -Name Fax -Force",
+    "rollbackCommand": "Set-Service -Name Fax -StartupType Manual; Start-Service -Name Fax"
+  },
+  {
+    "id": "disable-bluetooth",
+    "name": "Disable Bluetooth Support",
+    "description": "Disable Bluetooth Support Service (if you don't use Bluetooth)",
+    "category": "services",
+    "safe": true,
+    "command": "Set-Service -Name bthserv -StartupType Disabled; Stop-Service -Name bthserv -Force",
+    "rollbackCommand": "Set-Service -Name bthserv -StartupType Automatic; Start-Service -Name bthserv"
+  },
+  {
+    "id": "disable-smart-card",
+    "name": "Disable Smart Card",
+    "description": "Disable Smart Card service (if you don't use smart cards)",
+    "category": "services",
+    "safe": true,
+    "command": "Set-Service -Name SCardSvr -StartupType Disabled; Stop-Service -Name SCardSvr -Force",
+    "rollbackCommand": "Set-Service -Name SCardSvr -StartupType Manual; Start-Service -Name SCardSvr"
+  }
+]
