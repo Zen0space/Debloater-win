@@ -61,9 +61,9 @@ function App() {
         className={`${sidebarOpen ? 'w-64' : 'w-0'
           } transition-all duration-300 border-r border-border overflow-hidden`}
       >
-        <div className="p-4 border-b border-border">
-          <h1 className="text-xl font-bold">Debloater</h1>
-          <p className="text-sm text-muted-foreground">Windows 11</p>
+        <div className="h-16 flex flex-col justify-center px-4 border-b border-border">
+          <h1 className="text-xl font-bold leading-none">Debloater</h1>
+          <p className="text-sm text-muted-foreground leading-none mt-1">Windows 11</p>
         </div>
         <nav className="p-4 space-y-2">
           {navItems.map((item) => {
@@ -73,8 +73,8 @@ function App() {
                 key={item.id}
                 onClick={() => setCurrentPage(item.id)}
                 className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${currentPage === item.id
-                    ? 'bg-primary text-primary-foreground'
-                    : 'hover:bg-secondary text-muted-foreground hover:text-foreground'
+                  ? 'bg-primary text-primary-foreground'
+                  : 'hover:bg-secondary text-muted-foreground hover:text-foreground'
                   }`}
               >
                 <Icon size={18} />
@@ -85,8 +85,8 @@ function App() {
         </nav>
       </aside>
 
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <header className="h-14 border-b border-border flex items-center justify-between px-4">
+      <div className="flex-1 flex flex-col overflow-hidden min-w-[768px]">
+        <header className="h-16 border-b border-border flex items-center justify-between px-4">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}

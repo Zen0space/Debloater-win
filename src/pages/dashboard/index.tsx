@@ -15,7 +15,7 @@ export default function Dashboard() {
   const { systemInfo } = useSystemInfo();
   const { presets } = usePresets();
   const { items: allItems } = useDebloatItems('apps');
-  
+
   const [isProgressModalOpen, setIsProgressModalOpen] = useState(false);
   const [currentProgress, setCurrentProgress] = useState<ProgressItem[]>([]);
   const [isExecuting, setIsExecuting] = useState(false);
@@ -29,7 +29,7 @@ export default function Dashboard() {
 
   const handleApplySelected = async () => {
     const selectedItemsList = allItems.filter(item => selectedItems.has(item.id));
-    
+
     if (selectedItemsList.length === 0) {
       return;
     }
@@ -101,21 +101,21 @@ export default function Dashboard() {
           <CardTitle>Quick Actions</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             {presets.map((preset) => (
               <Button
                 key={preset.id}
                 variant="outline"
-                className="h-auto p-4 justify-start hover:bg-accent"
+                className="h-auto p-4 justify-start hover:bg-accent whitespace-normal"
                 onClick={() => handlePresetClick(preset.id)}
               >
-                <div className="flex items-center gap-3 w-full">
+                <div className="flex items-center gap-3 w-full min-w-0">
                   {preset.id === 'minimal' && <Shield size={24} className="text-primary flex-shrink-0" />}
                   {preset.id === 'balanced' && <Settings size={24} className="text-primary flex-shrink-0" />}
                   {preset.id === 'full' && <Shield size={24} className="text-primary flex-shrink-0" />}
-                  <div className="text-left flex-1">
-                    <p className="font-medium">{preset.name}</p>
-                    <p className="text-sm text-muted-foreground">{preset.description}</p>
+                  <div className="text-left flex-1 min-w-0">
+                    <p className="font-medium truncate">{preset.name}</p>
+                    <p className="text-sm text-muted-foreground line-clamp-2">{preset.description}</p>
                   </div>
                 </div>
               </Button>
@@ -123,17 +123,17 @@ export default function Dashboard() {
 
             <Button
               variant="outline"
-              className="h-auto p-4 justify-start hover:bg-accent"
+              className="h-auto p-4 justify-start hover:bg-accent whitespace-normal"
               disabled={selectedItemCount === 0 || isExecuting}
               onClick={handleApplySelected}
             >
-              <div className="flex items-center gap-3 w-full">
+              <div className="flex items-center gap-3 w-full min-w-0">
                 <Play size={24} className="text-primary flex-shrink-0" />
-                <div className="text-left flex-1">
-                  <p className="font-medium">Apply Selected</p>
-                  <p className="text-sm text-muted-foreground">
-                    {selectedItemCount > 0 
-                      ? `Apply ${selectedItemCount} selected items` 
+                <div className="text-left flex-1 min-w-0">
+                  <p className="font-medium truncate">Apply Selected</p>
+                  <p className="text-sm text-muted-foreground line-clamp-2">
+                    {selectedItemCount > 0
+                      ? `Apply ${selectedItemCount} selected items`
                       : 'Select items to apply'}
                   </p>
                 </div>
