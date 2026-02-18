@@ -8,6 +8,16 @@ export interface DebloatItem {
   rollbackCommand?: string;
   enabled?: boolean;
   isInstalled?: boolean;
+  packagePattern?: string;
+}
+
+export interface BloatwareApp {
+  id: string;
+  name: string;
+  description: string;
+  safe: boolean;
+  package_pattern: string;
+  is_installed: boolean;
 }
 
 export type Category = 

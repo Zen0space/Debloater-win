@@ -26,10 +26,18 @@ export async function executeItems(
     }
 
     try {
-      const result: CommandResult = await invoke('execute_command', {
-        command: item.command,
-        isRollback: false,
-      });
+      let result: CommandResult;
+      
+      if (item.packagePattern) {
+        result = await invoke('remove_app', {
+          packagePattern: item.packagePattern,
+        });
+      } else {
+        result = await invoke('execute_command', {
+          command: item.command,
+          isRollback: false,
+        });
+      }
 
       const lastProgress = progress[progress.length - 1];
       if (lastProgress) {
