@@ -39,7 +39,6 @@
       "../data/*": "data/"
     },
     "windows": {
-      "manifest": "./app.manifest",
       "wix": {
         "language": "en-US"
       },
