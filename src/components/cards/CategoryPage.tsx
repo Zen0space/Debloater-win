@@ -119,6 +119,16 @@ export function CategoryPage({ title, description, category }: CategoryPageProps
                   >
                     {item.safe ? 'Safe' : 'Use with caution'}
                   </span>
+                  {item.isInstalled !== undefined && (
+                    <span
+                      className={cn(
+                        'text-xs px-2 py-1 rounded-full',
+                        item.isInstalled ? 'bg-blue-500/10 text-blue-500' : 'bg-gray-500/10 text-gray-500'
+                      )}
+                    >
+                      {item.isInstalled ? 'Installed' : 'Not installed'}
+                    </span>
+                  )}
                   <span className="text-xs text-muted-foreground">
                     {item.category}
                   </span>

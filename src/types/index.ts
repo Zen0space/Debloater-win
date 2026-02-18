@@ -7,6 +7,7 @@ export interface DebloatItem {
   command: string;
   rollbackCommand?: string;
   enabled?: boolean;
+  isInstalled?: boolean;
 }
 
 export type Category = 

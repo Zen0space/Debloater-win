@@ -11,7 +11,14 @@ export function useDebloatItems(category: string) {
     async function loadItems() {
       try {
         setLoading(true);
-        const result = await invoke<DebloatItem[]>('load_items', { category });
+        
+        let result: DebloatItem[];
+        if (category === 'apps') {
+          result = await invoke<DebloatItem[]>('load_apps_with_status');
+        } else {
+          result = await invoke<DebloatItem[]>('load_items', { category });
+        }
+        
         setItems(result);
         setError(null);
       } catch (err) {
