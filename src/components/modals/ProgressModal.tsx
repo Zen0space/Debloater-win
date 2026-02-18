@@ -56,7 +56,7 @@ export function ProgressModal({ isOpen, progress, onClose }: ProgressModalProps)
                   {item.status === 'failed' && (
                     <XCircle className="text-destructive mt-1" size={18} />
                   )}
-                  
+
                   <div className="flex-1 min-w-0">
                     <p className={cn(
                       'font-medium',
@@ -71,7 +71,7 @@ export function ProgressModal({ isOpen, progress, onClose }: ProgressModalProps)
                       <p className="text-sm text-muted-foreground">Completed successfully</p>
                     )}
                     {item.status === 'failed' && (
-                      <p className="text-sm text-destructive">{item.error || 'Failed to execute'}</p>
+                      <p className="text-sm text-destructive break-words whitespace-pre-wrap">{item.error || 'Failed to execute'}</p>
                     )}
                   </div>
                 </div>
