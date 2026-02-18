@@ -1,6 +1,9 @@
 use std::fs;
 use serde::{Deserialize, Serialize};
 
+#[cfg(target_os = "windows")]
+use std::os::windows::process::CommandExt;
+
 #[derive(Debug, Serialize, Deserialize)]
 pub struct DebloatItem {
     pub id: String,
@@ -115,10 +118,12 @@ async fn execute_command(command: String, is_rollback: bool) -> CommandResult {
                     }
                 }
             }
-            Err(e) => CommandResult {
-                success: false,
-                output: String::new(),
-                error: Some(e.to_string()),
+            Err(e) => {
+                CommandResult {
+                    success: false,
+                    output: String::new(),
+                    error: Some(format!("{}", e)),
+                }
             }
         }
     }
