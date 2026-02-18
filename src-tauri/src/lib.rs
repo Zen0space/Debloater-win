@@ -34,10 +34,22 @@ pub struct CommandResult {
 
 #[tauri::command]
 fn get_data_dir() -> Result<String, String> {
-    let mut path = std::env::current_exe()
-        .map_err(|e| e.to_string())?;
-    path.pop();
+    let mut path = if cfg!(debug_assertions) {
+        std::env::current_dir()
+            .map_err(|e| e.to_string())?
+    } else {
+        let mut exe_path = std::env::current_exe()
+            .map_err(|e| e.to_string())?;
+        exe_path.pop();
+        exe_path
+    };
+    
     path.push("data");
+    
+    if !path.exists() {
+        return Err(format!("Data directory not found at: {}", path.to_string_lossy()));
+    }
+    
     Ok(path.to_string_lossy().to_string())
 }
 
@@ -75,15 +87,10 @@ async fn execute_command(command: String, is_rollback: bool) -> CommandResult {
     {
         use std::process::Command;
         
-        let output = if is_rollback {
-            Command::new("powershell")
-                .args(["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", &command])
-                .output()
-        } else {
-            Command::new("powershell")
-                .args(["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", &command])
-                .output()
-        };
+        let output = Command::new("powershell")
+            .args(["-NoProfile", "-ExecutionPolicy", "Bypass", "-WindowStyle", "Hidden", "-Command", &command])
+            .creation_flags(0x08000000)
+            .output();
         
         match output {
             Ok(output) => {
@@ -147,7 +154,8 @@ fn get_system_info() -> Result<serde_json::Value, String> {
         let username = std::env::var("USERNAME").unwrap_or_else(|_| "Unknown".to_string());
         
         let os_version = Command::new("powershell")
-            .args(["-NoProfile", "-Command", "[System.Environment]::OSVersion.VersionString"])
+            .args(["-NoProfile", "-WindowStyle", "Hidden", "-Command", "[System.Environment]::OSVersion.VersionString"])
+            .creation_flags(0x08000000)
             .output();
         
         let os_version_str = match os_version {
@@ -156,7 +164,8 @@ fn get_system_info() -> Result<serde_json::Value, String> {
         };
         
         let build = Command::new("powershell")
-            .args(["-NoProfile", "-Command", "(Get-CimInstance Win32_OperatingSystem).BuildNumber"])
+            .args(["-NoProfile", "-WindowStyle", "Hidden", "-Command", "(Get-CimInstance Win32_OperatingSystem).BuildNumber"])
+            .creation_flags(0x08000000)
             .output();
         
         let build_str = match build {
