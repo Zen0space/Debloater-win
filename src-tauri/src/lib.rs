@@ -17,11 +17,11 @@ pub struct DebloatItem {
     pub rollback_command: Option<String>,
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize)]
 pub struct BloatwareApp {
-    pub id: String,
-    pub name: String,
-    pub description: String,
+    pub id: &'static str,
+    pub name: &'static str,
+    pub description: &'static str,
     pub safe: bool,
     pub package_pattern: String,
     pub is_installed: bool,
